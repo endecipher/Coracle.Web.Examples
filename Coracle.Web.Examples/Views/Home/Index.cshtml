@@ -100,7 +100,20 @@
         </div>
     </div>
 
-    <div><hr/><br/><span style="display:flex; justify-content:center"><pre>Activity Logger</pre><br/></span></div>
+    <div class="row">
+        <hr/><br/>
+        <div class="col-10">
+            <span style="display:flex; justify-content:center"><pre>Activity Logger</pre><br/></span>
+        </div>
+        <div class="col-1">
+            <button type="button" class="btn-secondary" id="startCaptureBtn" onclick="startCapture()"><i class="fa fa-camera" style="color: lightgreen;"></i></button>
+            <button type="button" class="btn-secondary" id="stopCaptureBtn" onclick="stopCapture()" style="display:none"><i class="fa fa-stop fa-spin" style="color: indianred;"></i></button>
+        </div>
+        <div class="col-1">
+            <button type="button" class="btn-secondary" id="clearCaptureBtn" onclick="clearCapture()"><i class="fa fa-trash" style="color: whitesmoke;"></i></button>
+        </div>
+    </div>
+    
 
     <div class="row activityLogging" style="overflow-y: auto; overflow-x: hidden; height: 20em">
         <ol id="logList" style="padding-left: 4em; padding-right: 4em;"></ol>

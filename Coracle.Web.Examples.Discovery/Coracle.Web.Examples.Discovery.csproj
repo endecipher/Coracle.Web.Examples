@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Coracle.Samples\Coracle.Raft.Examples.csproj" />
+    <PackageReference Include="Coracle.Raft.Examples" Version="1.0.1" />
   </ItemGroup>
 
 </Project>

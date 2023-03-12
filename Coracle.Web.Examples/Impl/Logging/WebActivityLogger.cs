@@ -26,9 +26,15 @@ using ActivityLogger.Logging;
 using CorrelationId.Abstractions;
 using Newtonsoft.Json;
 using Coracle.Raft.Examples.Data;
+using Microsoft.Extensions.Options;
 
 namespace Coracle.Web.Impl.Logging
 {
+    public class CaptureOptions
+    {
+        public bool ShouldCapture { get; set; } = false;
+    }
+
     public class CoracleProperty
     {
         public enum Property 
@@ -51,16 +57,18 @@ namespace Coracle.Web.Impl.Logging
 
     public class WebActivityLogger : IActivityLogger
     {
-        public WebActivityLogger(ICorrelationContextAccessor correlationContext, IHubContext<LogHub> logHubContext, IHubContext<RaftHub> raftHubContext)
+        public WebActivityLogger(ICorrelationContextAccessor correlationContext, IHubContext<LogHub> logHubContext, IHubContext<RaftHub> raftHubContext, IOptions<CaptureOptions> options)
         {
             CorrelationContextAccessor = correlationContext;
             LogHubContext = logHubContext;
             RaftHubContext = raftHubContext;
+            Options = options;
         }
 
         public IHubContext<LogHub> LogHubContext { get; }
         public IHubContext<RaftHub> RaftHubContext { get; }
-        public ActivityLogLevel Level { get; set; } = ActivityLogLevel.Debug;
+        public IOptions<CaptureOptions> Options { get; }
+        public ActivityLogLevel Level { get; set; } = ActivityLogLevel.Verbose;
         public ICorrelationContextAccessor CorrelationContextAccessor { get; }
 
         public void Log(ActivityLogger.Logging.Activity e)
@@ -75,7 +83,8 @@ namespace Coracle.Web.Impl.Logging
 
             string message = JsonConvert.SerializeObject(activity, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 
-            LogHubContext.Clients.All.SendAsync(LogHub.ReceiveLog, message);
+            if (Options.Value.ShouldCapture) 
+                LogHubContext.Clients.All.SendAsync(LogHub.ReceiveLog, message);
 
             foreach (var prop in Frame(e))
             {

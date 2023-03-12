@@ -17,13 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Coracle.Raft.Examples" Version="1.0.1" />
     <PackageReference Include="CorrelationId" Version="3.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.3" />
     <PackageReference Include="Microsoft.jQuery.Unobtrusive.Ajax" Version="3.2.6" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Coracle.Samples\Coracle.Raft.Examples.csproj" />
   </ItemGroup>
 
 </Project>

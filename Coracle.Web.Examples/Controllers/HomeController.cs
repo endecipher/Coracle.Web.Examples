@@ -20,8 +20,10 @@
 // SOFTWARE.
 #endregion
 
+using Coracle.Web.Impl.Logging;
 using Coracle.Web.Impl.Node;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace Coracle.Web.Controllers
 {
@@ -37,6 +39,23 @@ namespace Coracle.Web.Controllers
             coracleAccessor.Ready();
 
             return coracleAccessor.EngineConfig.NodeId;
+        }
+
+        public string Capture([FromQuery] string value, [FromServices] IOptions<CaptureOptions> options)
+        {
+            switch (value.ToLower())
+            {
+                case "start":
+                    options.Value.ShouldCapture = true;
+                    break;
+                case "stop":
+                    options.Value.ShouldCapture = false;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            return StatusCodes.Status200OK.ToString();
         }
     }
 }

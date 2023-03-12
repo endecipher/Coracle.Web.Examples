@@ -67,6 +67,8 @@ namespace Coracle.Web
             IConfigurationSection config = Configuration.GetSection(Strings.Configuration.EngineConfiguration);
             services.Configure<EngineConfigurationOptions>(config);
 
+            services.AddOptions<CaptureOptions>();
+
             new GuidanceDependencyRegistration().Register(new DotNetDependencyContainer(services));
             new Raft.Dependencies.Registration().Register(new DotNetDependencyContainer(services));
 
