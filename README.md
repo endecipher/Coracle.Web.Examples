@@ -5,7 +5,7 @@ An example use-case of [Coracle.Raft](https://github.com/endecipher/Coracle.Raft
 [![Dependency](https://badgen.net/badge/uses/Coracle.Raft.Examples/purple?icon=nuget)](https://www.nuget.org/packages/Coracle.Raft.Examples/)
 
 
-<img src="https://github.com/endecipher/Coracle.Web.Examples/blob/main/Images/Coracle.Web.Examples%20-%20Workflow.gif" width="60" height="60" />
+<img src="https://github.com/endecipher/Coracle.Web.Examples/blob/main/Images/Coracle.Web.Examples%20-%20Workflow.gif" width="60%" height="60%" />
 
 ## Features
 
